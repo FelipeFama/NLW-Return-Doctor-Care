@@ -1,9 +1,36 @@
-window.addEventListener('scroll', onScroll);
+window.addEventListener('scroll', onScroll)
 
 onScroll()
 function onScroll() {
   showNavOnScroll()
   showBackToTopButtonOnScroll()
+
+  activateMenuAtCurrentSection(home)
+  activateMenuAtCurrentSection(services)
+  activateMenuAtCurrentSection(about)
+  activateMenuAtCurrentSection(contact)
+}
+
+function activateMenuAtCurrentSection(section) {
+  const targetLine = scrollY + innerHeight / 2
+
+  const sectionTop = section.offsetTop
+  const sectionHeight = section.offsetHeight
+  const sectionTopReachOrPassedTargetLine = targetLine >= sectionTop
+
+  const sectionEndsAt = sectionTop + sectionHeight
+  const sectionEndReachOrPassedTargetLine = sectionEndsAt <= targetLine
+
+  const sectionBoundaries = sectionTopReachOrPassedTargetLine && !sectionEndReachOrPassedTargetLine
+
+  const sectionId = section.getAttribute('id')
+  const menuElement = document.querySelector(`.menu a[href*=${sectionId}]`)
+
+
+  menuElement.classList.remove('active')
+  if (sectionBoundaries) {
+    menuElement.classList.add('active')
+  }
 }
 
 function showNavOnScroll() {
@@ -44,5 +71,8 @@ ScrollReveal({
   #about,
   #about header,
   #about .content,
-  #about img
+  #about img,
+  #contact,
+  #contact img,
+  footer
 `)
