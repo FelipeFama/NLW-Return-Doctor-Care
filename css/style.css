@@ -579,7 +579,7 @@ footer .social-links {
 
   /*=====Home=====*/
   #home::before {
-    height: calc(120% - var(--nav-height));
+    height: calc(60rem - var(--nav-height));
   }
 
   #home {
